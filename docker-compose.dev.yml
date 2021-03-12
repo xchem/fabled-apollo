@@ -1,0 +1,14 @@
+services:
+  apollo:
+    container_name: apollo
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+        - ./server:/code/server
+    ports:
+      - 3000:3000
+    command: >
+      bash -c "npm init --yes
+      && npm install @apollo/client graphql apollo-datasource-rest apollo-server dotenv
+      && node src/index.js"
