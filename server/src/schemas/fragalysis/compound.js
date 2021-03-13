@@ -9,6 +9,7 @@ const typeDef = gql`
               mol_wt: Float
               num_h_acceptors: Int
               num_h_donors: Int
+              chembl_mols: [ChemblMol]
             }
 `
 

@@ -5,6 +5,7 @@ const typeDef = gql`
               id: Int
               code: String
               target_id: Int
+              target: Target
               prot_type: String
               pdb_info: String
               bound_info: String

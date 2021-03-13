@@ -11,11 +11,13 @@ const ChemblMol = require('./schemas/chembl/molecule');
 const Query = gql`       
           
     type Query {
-          target(title: String!): Target
+          targetFromName(title: String!): Target
+          targetFromID(target_id: Int!): Target
           targets: [Target]
+          proteins: [Protein]
           proteinFromCode(code: String!): Protein
           proteinsFromTargetID(target_id: Int!): [Protein]
-          proteins: [Protein]
+          proteinFromID(prot_id: Int!): Protein
           molecules: [Molecule]
           compounds: [Compound]
           activities: [Activity]

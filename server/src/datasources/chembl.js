@@ -67,6 +67,7 @@ class ChemblAPI extends RESTDataSource {
 
     async getActivityByQuery(query, limit = 50, offset = 0) {
         const response = await this.get(`activity/search?format=json&limit=${limit}&offset=${offset}&q=${query}`);
+        console.log(response)
         const result = response.activities;
         return Array.isArray(result)
             ? result.map(activity => this.activityReducer(activity))
@@ -113,15 +114,13 @@ class ChemblAPI extends RESTDataSource {
             molecule_hierarchy: molecule.molecule_hierarchy,
             cross_references: molecule.cross_references,
             atc_classifications: molecule.atc_classifications,
+            activities: molecule.activities,
         }
     }
 
     async getChemblMoleculeBySmiles(smiles, limit = 50, offset = 0) {
-        console.log(`molecule/?molecule_structures__canonical_smiles__flexmatch=${smiles}&format=json&limit=${limit}&offset=${offset}`);
         const response = await this.get(`molecule/?molecule_structures__canonical_smiles__flexmatch=${smiles}&format=json&limit=${limit}&offset=${offset}`);
-        console.log(response);
         const result = response.molecules;
-        console.log(result);
         return Array.isArray(result)
             ? result.map(molecule => this.moleculeReducer(molecule))
             : [];

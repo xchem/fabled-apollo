@@ -8,7 +8,7 @@ class FragalysisAPI extends RESTDataSource {
 
     targetReducer(target) {
         return {
-            id: target.id || 0,
+            id: target.id,
             title: target.title,
             template_protein: target.template_protein,
             metadata: target.metadata,
@@ -32,6 +32,12 @@ class FragalysisAPI extends RESTDataSource {
         console.log(response);
         console.log(response["results"]);
         return this.targetReducer(response.results[0])
+    }
+
+    async getTargetFromID(target_id) {
+        const response = await this.get(`targets/${target_id}`);
+        console.log(response)
+        return this.targetReducer(response)
     }
 
     proteinReducer(protein) {
@@ -63,6 +69,11 @@ class FragalysisAPI extends RESTDataSource {
         console.log(response.results);
         return this.proteinReducer(response.results[0])
 
+    }
+
+    async getProteinFromID(prot_id) {
+        const response = await this.get(`proteins/${prot_id}`);
+        return this.proteinReducer(response)
     }
 
     async getProteinsFromTargetID(target_id) {

@@ -1,7 +1,10 @@
 module.exports = {
   Query: {
-    target: (_source, { title }, { dataSources }) =>
+    targetFromName: (_source, { title }, { dataSources }) =>
         dataSources.fragalysisAPI.getATarget(title),
+
+    targetFromID: (_source, { target_id }, { dataSources }) =>
+        dataSources.fragalysisAPI.getTargetFromID(target_id),
 
     targets: (_source, _args, { dataSources }) =>
         dataSources.fragalysisAPI.getAllTargets(),
@@ -14,6 +17,9 @@ module.exports = {
 
     proteinsFromTargetID: (_source, { target_id }, {dataSources}) =>
         dataSources.fragalysisAPI.getProteinsFromTargetID(target_id),
+
+    proteinFromID: (_source, { prot_id }, {dataSources}) =>
+        dataSources.fragalysisAPI.getProteinFromID(prot_id),
 
     molecules: (_source, _args, {dataSources}) =>
         dataSources.fragalysisAPI.getAllMolecules(),
@@ -30,6 +36,27 @@ module.exports = {
     chemblMoleculeBySmiles: (_source, { smiles }, { dataSources }) =>
         dataSources.chemblAPI.getChemblMoleculeBySmiles(smiles),
   },
+
+  // Target: {
+  //   proteins: async (parent, args, {dataSources}) =>
+  //       dataSources.fragalysisAPI.getProteinFromID(parent.protein_set)
+  // },
+
+  Protein: {
+    target: async (parent, args, {dataSources}) =>
+        dataSources.fragalysisAPI.getTargetFromID(parent.target_id)
+  },
+
+  Compound: {
+    chembl_mols: async (parent, args, {dataSources}) =>
+      dataSources.chemblAPI.getChemblMoleculeBySmiles(parent.smiles)
+  },
+
+  ChemblMol: {
+    activities: async (parent, args, {dataSources}) =>
+      dataSources.chemblAPI.getActivityByQuery(parent.molecule_chembl_id)
+
+  }
 };
 
 // module.exports = { resolvers };
