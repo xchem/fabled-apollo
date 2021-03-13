@@ -5,6 +5,8 @@ const Target = require('./schemas/fragalysis/target');
 const Protein = require('./schemas/fragalysis/protein');
 const Molecule = require('./schemas/fragalysis/molecule');
 const Compound = require('./schemas/fragalysis/compound');
+const Activity = require('./schemas/chembl/activities');
+const ChemblMol = require('./schemas/chembl/molecule');
 
 const Query = gql`       
           
@@ -16,11 +18,14 @@ const Query = gql`
           proteins: [Protein]
           molecules: [Molecule]
           compounds: [Compound]
+          activities: [Activity]
+          activitiesByQuery(query: String!): [Activity]
+          chemblMoleculeBySmiles(smiles: String!): [ChemblMol]
         }
         `;
 
 const schema = makeExecutableSchema({
-        typeDefs: [Query, Protein, Target, Molecule, Compound],
+        typeDefs: [Query, Protein, Target, Molecule, Compound, Activity, ChemblMol],
         resolvers: resolvers,
 });
 

@@ -20,6 +20,15 @@ module.exports = {
 
     compounds: (_source, _args, {dataSources}) =>
         dataSources.fragalysisAPI.getAllCompounds(),
+
+    activities: (_source, _args, {dataSources}) =>
+        dataSources.chemblAPI.getAllActivities(),
+
+    activitiesByQuery: (_source, { query }, { dataSources }) =>
+        dataSources.chemblAPI.getActivityByQuery(query),
+
+    chemblMoleculeBySmiles: (_source, { smiles }, { dataSources }) =>
+        dataSources.chemblAPI.getChemblMoleculeBySmiles(smiles),
   },
 };
 
