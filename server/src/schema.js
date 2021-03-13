@@ -23,6 +23,7 @@ const Query = gql`
           activities: [Activity]
           activitiesByQuery(query: String!): [Activity]
           chemblMoleculeBySmiles(smiles: String!): [ChemblMol]
+          compoundFromID(cmpd_id: Int!): Compound 
         }
         `;
 

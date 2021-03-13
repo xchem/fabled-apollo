@@ -4,6 +4,8 @@ const typeDef = gql`
      type Molecule {
               id: Int
               smiles: String
+              compound: Compound
+              protein: Protein
               cmpd_id: Int
               prot_id: Int
               protein_code: String
