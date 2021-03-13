@@ -13,7 +13,13 @@ module.exports = {
         dataSources.fragalysisAPI.getProteinFromCode(code),
 
     proteinsFromTargetID: (_source, { target_id }, {dataSources}) =>
-        dataSources.fragalysisAPI.getProteinsFromTargetID(target_id)
+        dataSources.fragalysisAPI.getProteinsFromTargetID(target_id),
+
+    molecules: (_source, _args, {dataSources}) =>
+        dataSources.fragalysisAPI.getAllMolecules(),
+
+    compounds: (_source, _args, {dataSources}) =>
+        dataSources.fragalysisAPI.getAllCompounds(),
   },
 };
 

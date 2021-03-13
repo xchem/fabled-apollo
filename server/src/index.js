@@ -2,11 +2,8 @@ require('dotenv').config();
 
 const PORT = 3000;
 const { ApolloServer } = require('apollo-server');
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
+const schema = require('./schema');
 const FragalysisAPI = require('./datasources/fragalysis');
-
-// console.log(FragalysisAPI());
 
 // set up any dataSources our resolvers need
 const dataSources = () => ({
@@ -14,15 +11,9 @@ const dataSources = () => ({
 });
 
 // Set up Apollo Server
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  dataSources,
-});
+const server = new ApolloServer({ schema, dataSources });
 
-// Start our server if we're not in a test env.
-// if we're in a test env, we'll manually start it in a test
-// if (process.env.NODE_ENV !== 'test') {
+// Start our server
 server.listen({port: PORT}).then(() => {
   console.log(`
     Server is running!

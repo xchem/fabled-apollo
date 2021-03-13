@@ -67,7 +67,7 @@ class FragalysisAPI extends RESTDataSource {
 
     async getProteinsFromTargetID(target_id) {
         console.log(target_id);
-        console.log(`proteins/?target_id=${target_id}`)
+        console.log(`proteins/?target_id=${target_id}`);
         const response = await this.get(`proteins/?target_id=${target_id}`);
         const result = response.results;
         console.log(response);
@@ -76,6 +76,62 @@ class FragalysisAPI extends RESTDataSource {
           ? result.map(protein => this.proteinReducer(protein))
           : [];
 
+    }
+
+    moleculeReducer(molecule) {
+        return {
+            id: molecule.id,
+            smiles: molecule.smiles,
+            cmpd_id: molecule.cmpd_id,
+            prot_id: molecule.prot_id,
+            protein_code: molecule.protein_code,
+            mol_type: molecule.mol_type,
+            molecule_protein: molecule.molecule_protein,
+            lig_id: molecule.lig_id,
+            chain_id: molecule.chain_id,
+            sdf_info: molecule.sdf_info,
+            x_com: molecule.x_com,
+            y_com: molecule.y_com,
+            z_com: molecule.z_com,
+            mw: molecule.mw,
+            logp: molecule.logp,
+            tpsa: molecule.tpsa,
+            ha: molecule.tpsa,
+            hacc: molecule.hacc,
+            hdon: molecule.hdon,
+            rots: molecule.rots,
+            rings: molecule.rings,
+            velec: molecule.velec,
+
+        }
+    }
+
+    async getAllMolecules() {
+        const response = await this.get('molecules');
+        const result = response.results;
+        return Array.isArray(result)
+          ? result.map(molecule => this.moleculeReducer(molecule))
+          : [];
+    }
+
+    compoundReducer(compound) {
+        return {
+            id: compound.id,
+            inchi: compound.inchi,
+            smiles: compound.smiles,
+            mol_log_p: compound.mol_log_p,
+            mol_wt: compound.mol_wt,
+            num_h_acceptors: compound.num_h_acceptors,
+            num_h_donors: compound.num_h_donors,
+        }
+    }
+
+    async getAllCompounds() {
+        const response = await this.get('compounds');
+        const result = response.results;
+        return Array.isArray(result)
+          ? result.map(compound => this.compoundReducer(compound))
+          : [];
     }
 }
 
