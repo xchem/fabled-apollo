@@ -40,11 +40,6 @@ module.exports = {
         dataSources.fragalysisAPI.getCompoundFromID(cmpd_id),
   },
 
-  // Target: {
-  //   proteins: async (parent, args, {dataSources}) =>
-  //       dataSources.fragalysisAPI.getProteinFromID(parent.protein_set)
-  // },
-
   Protein: {
     target: async (parent, args, {dataSources}) =>
         dataSources.fragalysisAPI.getTargetFromID(parent.target_id)

@@ -27,6 +27,6 @@ const typeDef = gql`
               rings: Int
               velec: Int
             }
-`
+`;
 
 module.exports = typeDef;

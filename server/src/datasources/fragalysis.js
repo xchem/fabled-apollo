@@ -10,11 +10,22 @@ class FragalysisAPI extends RESTDataSource {
         return {
             id: compound.id,
             inchi: compound.inchi,
+            long_inchi: compound.long_inchi,
             smiles: compound.smiles,
+            current_identifier: compound.current_identifier,
+            all_identifiers: compound.all_identifiers,
             mol_log_p: compound.mol_log_p,
             mol_wt: compound.mol_wt,
+            tpsa: compound.tpsa,
+            heavy_atom_count: compound.heavy_atom_count,
+            nhoh_count: compound.nhoh_count,
+            no_count: compound.no_count,
             num_h_acceptors: compound.num_h_acceptors,
             num_h_donors: compound.num_h_donors,
+            num_het_atoms: compound.num_het_atoms,
+            num_rot_bonds: compound.num_rot_bonds,
+            num_val_electrons: compound.num_val_electrons,
+            ring_count: compound.ring_count,
         }
     }
 
