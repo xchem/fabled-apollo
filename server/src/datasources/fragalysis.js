@@ -157,6 +157,14 @@ class FragalysisAPI extends RESTDataSource {
           ? result.map(molecule => this.moleculeReducer(molecule))
           : [];
     }
+
+    async getMoleculesFromTarget(title) {
+        const response = await this.get(`molecules/?prot_id__target_id__title=${title}`);
+        const result = response.results;
+        return Array.isArray(result)
+          ? result.map(molecule => this.moleculeReducer(molecule))
+          : [];
+    }
 }
 
 module.exports = FragalysisAPI;

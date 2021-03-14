@@ -36,8 +36,11 @@ module.exports = {
     chemblMoleculeBySmiles: (_source, { smiles }, { dataSources }) =>
         dataSources.chemblAPI.getChemblMoleculeBySmiles(smiles),
 
-    compoundFromID: (_source, {cmpd_id}, {dataSources}) =>
+    compoundFromID: (_source, { cmpd_id }, {dataSources}) =>
         dataSources.fragalysisAPI.getCompoundFromID(cmpd_id),
+
+    moleculesFromTarget: (_source, { title }, { dataSources }) =>
+        dataSources.fragalysisAPI.getMoleculesFromTarget(title),
   },
 
   Protein: {
@@ -61,7 +64,7 @@ module.exports = {
         dataSources.fragalysisAPI.getProteinFromID(parent.prot_id),
 
     compound: async (parent, args, {dataSources}) =>
-        dataSources.getCompoundFromID(parent.cmpd_id),
+        dataSources.fragalysisAPI.getCompoundFromID(parent.cmpd_id),
   }
 };
 

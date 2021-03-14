@@ -20,7 +20,7 @@ const typeDef = gql`
               num_het_atoms: Int
               num_rot_bonds: Int
               num_val_electrons: Int
-              ring_count: In
+              ring_count: Int
               chembl_mols: [ChemblMol]
             }
 `
