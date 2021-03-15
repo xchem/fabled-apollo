@@ -119,7 +119,7 @@ class ChemblAPI extends RESTDataSource {
     }
 
     async getChemblMoleculeBySmiles(smiles, limit = 50, offset = 0) {
-        const response = await this.get(`molecule/?molecule_structures__canonical_smiles__flexmatch=${smiles}&format=json&limit=${limit}&offset=${offset}`);
+        const response = await this.get(`molecule/?molecule_structures__canonical_smiles__flexmatch=${encodeURIComponent(smiles)}&format=json&limit=${limit}&offset=${offset}`);
         const result = response.molecules;
         return Array.isArray(result)
             ? result.map(molecule => this.moleculeReducer(molecule))
