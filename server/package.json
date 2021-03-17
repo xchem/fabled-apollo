@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@apollo/client": "^3.3.11",
+    "@apollo/client": "^3.3.12",
     "apollo-datasource-rest": "^0.10.0",
     "apollo-server": "^2.21.1",
     "dotenv": "^8.2.0",
