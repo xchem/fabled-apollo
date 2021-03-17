@@ -52,6 +52,7 @@ class FragalysisAPI extends RESTDataSource {
             zip_archive: target.zip_archive,
             protein_set: target.protein_set,
             project_id: target.project_id,
+            sequences: target.sequences,
         };
     }
 

@@ -7,7 +7,7 @@ const Molecule = require('./schemas/fragalysis/molecule');
 const Compound = require('./schemas/fragalysis/compound');
 const Activity = require('./schemas/chembl/activities');
 const ChemblMol = require('./schemas/chembl/molecule');
-const Sequence = require('./schemas/fragalysis-viewer/sequence');
+// const Sequence = require('./schemas/fragalysis-viewer/sequence');
 const RelatedStructure = require('./schemas/rcsb-pdb/related-structures');
 
 const Query = gql`       
@@ -27,16 +27,14 @@ const Query = gql`
           chemblMoleculeBySmiles(smiles: String!): [ChemblMol]
           compoundFromID(cmpd_id: Int!): Compound 
           moleculesFromTarget(title: String!): [Molecule]
-          sequenceFromID(prot_id: Int!): [Sequence]
-          sequenceFromPath(prot_path: String): [Sequence]
-          relatedStructuresFromSequence(sequence: String!, limit: Int, offset: Int): [RelatedStructure]
+          relatedStructuresFromSequence(sequence: String!, identity_cutoff: Float, limit: Int, offset: Int): [RelatedStructure]
         }
         `;
 
 const schema = makeExecutableSchema({
         typeDefs: [Query, Protein, Target,
                 Molecule, Compound, Activity,
-                ChemblMol, Sequence, RelatedStructure],
+                ChemblMol, RelatedStructure],
         resolvers: resolvers,
 });
 

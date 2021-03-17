@@ -28,7 +28,7 @@ class RCSBPDB extends RESTDataSource {
         }
     }
 
-    async getRelatedFromSequence(sequence, limit=10, offset=0) {
+    async getRelatedFromSequence(sequence, identity_cutoff=0.9, limit=10, offset=0) {
         const query_string = `
         {
   "query": {
@@ -36,7 +36,7 @@ class RCSBPDB extends RESTDataSource {
     "service": "sequence",
     "parameters": {
       "evalue_cutoff": 1,
-      "identity_cutoff": 0.9,
+      "identity_cutoff": ${identity_cutoff},
       "target": "pdb_protein_sequence",
       "value": "${sequence}"
     }

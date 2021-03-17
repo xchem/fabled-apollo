@@ -42,12 +42,6 @@ module.exports = {
     moleculesFromTarget: (_source, { title }, { dataSources }) =>
         dataSources.fragalysisAPI.getMoleculesFromTarget(title),
 
-    sequenceFromID: (_source, {prot_id}, {dataSources}) =>
-        dataSources.fragalysisViewer.getSequenceFromID(prot_id),
-
-    sequenceFromPath: (_source, {prot_path}, {dataSources}) =>
-        dataSources.fragalysisViewer.getSequenceFromPath(prot_path),
-
     relatedStructuresFromSequence: (_source, {sequence, limit, offset}, {dataSources}) =>
         dataSources.rcsbPDB.getRelatedFromSequence(sequence, limit, offset),
 
@@ -58,12 +52,17 @@ module.exports = {
         dataSources.fragalysisAPI.getTargetFromID(parent.target_id),
   },
 
-  Target: {
-    ref_sequences: async (parent, args, {dataSources}) =>
-        dataSources.fragalysisViewer.getSequenceFromPath(parent.template_protein),
-    // related_structures: async (parent, args, {dataSources}) =>
-    //     dataSources.rcsbPDB.getRelatedFromSequence(dataSources.fragalysisViewer.getSequenceFromPath(parent.template_protein)[0].sequence),
+  Sequences: {
+    related_structures: async (parent, args, {dataSources}) =>
+        dataSources.rcsbPDB.getRelatedFromSequence(parent.sequence)
   },
+
+  // Target: {
+  //   ref_sequences: async (parent, args, {dataSources}) =>
+  //       dataSources.fragalysisViewer.getSequenceFromPath(parent.template_protein),
+  //   // related_structures: async (parent, args, {dataSources}) =>
+  //   //     dataSources.rcsbPDB.getRelatedFromSequence(dataSources.fragalysisViewer.getSequenceFromPath(parent.template_protein)[0].sequence),
+  // },
 
   Compound: {
     chembl_mols: async (parent, args, {dataSources}) =>
